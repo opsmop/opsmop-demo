@@ -34,10 +34,10 @@ class BasicExample(Role):
             # more provider types are coming soon.
             # Package(name='pygments', method='pip'), 
 
-            # install
+            # uninstall
             Package(name='cowsay', absent=True),
 
-            # uninstall
+            # install
             Package(name='cowsay')
         )
 
