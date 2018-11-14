@@ -8,7 +8,7 @@ from opsmop.pull.signals.basic import SleepTimer
 from opsmop.client.callbacks import CliCallbacks
 
 repo     = "git@github.com:vespene-io/opsmop-demo.git"
-filename = "hello.py"
+filename = "content/hello.py"
 post     = "yourhost.example.com/api/opsmop_status"
 
 # if you don't want to have a pull_cfg.py for each policy
@@ -33,7 +33,7 @@ SIGNALS = [ SleepTimer(seconds=600) ]
 
 CLI_CALLBACKS = [ CliCallbacks() ]
 
-STATUS = [ RestPost(post) ]
+PULL_CALLBACKS = [ RestPost(post) ]
 
 # whether a pull should be attempted immediately on startup instead of waiting for the first signal
 
