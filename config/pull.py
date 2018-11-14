@@ -20,7 +20,7 @@ post     = "yourhost.example.com/api/opsmop_status"
 #
 # and then execute opsmop-pull as:
 #
-#     REPO=git@github.com:vespene-io/opsmop-demo.git FILENAME=hello.py opsmop-pull pull.cfg
+#     REPO=git@github.com:vespene-io/opsmop-demo.git FILENAME=content/hello.py opsmop-pull pull.cfg
 
 TRANSPORT = GitTransport(repo=repo, branch="master")
 
