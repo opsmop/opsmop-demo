@@ -1,40 +1,30 @@
-# This is OpsMop
-# (C) Michael DeHaan LLC <michael@michaeldehaan.net>, 2018.
-# License: GPLv3
-
 from opsmop.core.easy import *
 
-# bin/opsmop check filename.py
-# bin/opsmop apply filename.py
+# bin/opsmop check hello.py
+# bin/opsmop apply hello.py
 
-class WebServers(Role):
+class HelloRole(Role):
 
     def set_variables(self):
-        return dict(dog='fido', code=1234)
+        return dict(program='OpsMop')
 
     def set_resources(self):
         return Resources(
-            File(name="/tmp/foo.txt", from_content="Hello World!", signals="restart_foo"),
-            Package(name="cowsay", method="brew", signals="restart_nginx"),
-            Echo("resources complete!")
+            File(name="/tmp/foo.txt", from_content="Hello {{ V.program }} World! {{ V.ready }}")
         )
 
     def set_handlers(self):
-        return Handlers(
-            restart_nginx = Service(name='nginx', restarted=True),
-            restart_foo   = Service(name='foo', restarted=True),
-        )
+        return Handlers()
 
-class Demo(Policy):
+class Hello(Policy):
 
     def set_variables(self):
-        return dict(asdf = 'jkl;')
+        return dict(ready='Congratulations')
 
     def set_roles(self):
-        roles = [ WebServers(name='webservers'), ]
-        return Roles(*roles)
+        return Roles(HelloRole())
    
 EXPORTED = [
-    Demo(),
+    Hello(),
 ]
 
