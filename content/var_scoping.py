@@ -20,11 +20,7 @@ class One(Role):
 
         return Resources(
             Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
-            Assert(foosball=1),
-            Assert(glorp='fizz'),
-            Assert(blarg=5150),
-            Assert(other=True),
-            Assert(level='one'),
+            Assert(foosball=1, glorp='fizz', blarg=5150, other=True, level='one'),
             Set(level='runtime'),
             # SetGlobal(blippy='foo'),
             Resources(
@@ -45,10 +41,9 @@ class Two(Role):
 
         return Resources(
             Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
-            Assert(blarg=5150),
             Echo("foosball={{ foosball }}"),
             # Assert(blippy='foo'),   
-            Assert(level='two'),
+            Assert(blarg=5150, level='two'),
             # some alternate ways to do things, more as a proof of internals
             Assert('blarg > 3000'),
             Debug('blarg', 'foosball', random=Eval('2 * blarg + 1000'))
