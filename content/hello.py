@@ -1,7 +1,13 @@
-from opsmop.core.easy import *
-
+#
+# A very minimal language example
+#
+# USAGE:
+#
 # bin/opsmop check hello.py
 # bin/opsmop apply hello.py
+#
+
+from opsmop.core.easy import *
 
 class HelloRole(Role):
 
@@ -9,12 +15,17 @@ class HelloRole(Role):
         return dict(program='OpsMop')
 
     def set_resources(self):
+
+        msg = T("Hello {{ program }} World! {{ say}}!")
+
         return Resources(
-            File(name="/tmp/foo.txt", from_content="Hello {{ program }} World! {{ say }}")
+            File(name="/tmp/foo.txt", from_content=msg)
         )
 
     def set_handlers(self):
         return Handlers()
+
+# -----------------
 
 class Hello(Policy):
 
