@@ -14,30 +14,24 @@ from opsmop.core.easy import *
 class One(Role):
 
     def set_variables(self):
-
         return dict(glorp='fizz', level='one')
 
     def set_resources(self):
 
         return Resources(
-            
-            Echo("Role parameterization can work by kwargs. foosball={{ foosball }}"),
-            Echo("Role parameterization can work by set_variables. glorp={{ glorp }}"),
-            Echo("Policies can be parameterized, blarg={{ blarg }}"),
-            Echo("Policy scope is available, other={{ other }} and should be True"),
-
-            # Global(global_var='blippy')
-
-            Echo("Inside the Role 'One', level={{ level }} and should be 'one'"),
-
+            Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
+            Assert(foosball=1),
+            Assert(glorp='fizz'),
+            Assert(blarg=5150),
+            Assert(other=True),
+            Assert(level='one'),
             Set(level='runtime'),
-
+            # SetGlobal(blippy='foo'),
             Resources(
                 Set(level='nested'),
-                Echo("Inside a nested scope, level={{ level }} and should be 'nested'")
+                # Assert(level='nested'),
             ),
-
-            Echo("Back outside that scope, level={{ level }} and should be 'runtime'")
+            Assert(level='runtime'),
         )
 
 # ==============================================================================
@@ -50,16 +44,14 @@ class Two(Role):
     def set_resources(self):
 
         return Resources(
-
-            Echo("Policies can be parameterized, blarg={{ blarg }}"),
-            Echo("Roles can be parameterized. foosball={{ foosball }} and should be 2 or 3"),
-
-            # future feature (soon):
-            # SetGlobal(blippy='foo'),
-            # Echo("Global variables can be set. global_var={{ blippy }}"),
- 
-            Echo("This role defines level differently than the Role 'One'. level={{ level }} and should be two")
-
+            Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
+            Assert(blarg=5150),
+            Echo("foosball={{ foosball }}"),
+            # Assert(blippy='foo'),   
+            Assert(level='two'),
+            # some alternate ways to do things, more as a proof of internals
+            Assert('blarg > 3000'),
+            Debug('blarg', 'foosball', random=Eval('2 * blarg + 1000'))
         )
 
 # ==============================================================================
@@ -70,13 +62,9 @@ class ScopeTest(Policy):
         return dict(level='Scope', other=True)
 
     def set_roles(self):
-
         return Roles(
-
             One(foosball=1),
-
             Two(foosball=2),
-
             Two(foosball=3)
         )
 
