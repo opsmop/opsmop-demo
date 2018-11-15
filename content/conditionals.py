@@ -21,9 +21,6 @@ class Main(Role):
         # for this example we won't assign all conditionals to variables
         # but you easily can, and this can make things more clear
 
-        choice1 = Choice(0,1)
-        choice2 = Choice('heads', 'tails')
-
         return Resources(
 
             # DEMO: Basic Handlers, and also a template demo!            
@@ -33,29 +30,27 @@ class Main(Role):
 
             # DEMO: Variables in strings and templates! F is for facts, V is for variables.
             Echo("the OS distribution is {{ F.os_type }}"),
-            Echo("the value of x is {{ V.x }}"),
+            Echo("the value of x is {{ x }}"),
 
             # DEMO: basic and advanced conditional tests
-            Shell("echo test", when=FileTest(present="/etc/motd.txt")),
-            Echo("x is true at run time", when=V.x),
-            Echo("a > b", when=More(V.a, V.b)),
-            Echo("c says go", when=Equal(V.c, "says_go")),
+            # Shell("echo test", when="'/etc/motd.txt' | present"), # we'll need some filters
+            Echo("x is true at run time", when='x'),
+            Echo("a > b", when="a > b"),
+            Echo("c says go", when="c == 'says_go'"),
             Echo("this is unix? {{ F.os_type }}"),
-            Echo("all are true?", when=All(V.e, V.f, V.g)),
-            Echo("one is true?", when=One(V.e, V.f, V.g)),
-            #Echo("x or (y & z)", when=One(V.x, All(V.y, V.z)),
-            Echo("randomly", when=choice1),
+            Echo("all are true?", when="e and f and g"),
+            Echo("one is true?", when="e or f or g"),
 
             # DEMO: Nested Resources with a conditional attached!
             Resources(
                 [ Echo("group1"), Echo("group2") ],
-                when=Equal(True,False)
+                when="a == 2"
             ),
  
             # DEMO: use results in subsequent methods
             Shell(cmd="date", register="date", ignore_errors=True),
-            Echo("shell output was {{ V.date.data }}"),
-            Echo("the shell command was ok", when=Equal(V.date.rc, 0)),
+            Echo("shell output was {{ date.data }}"),
+            Echo("the shell command was ok", when="date.rc == 0"),
 
             # DEMO: Dynamic Variable Assignment
             # The set operation allows creating variables dynamically.  Strings can contain template
@@ -63,12 +58,12 @@ class Main(Role):
             # at load time, and any Python is fair game. Remember to access anything set with
             # Set() we have to use Jinja2 expressions in quotes, otherwise we don't need to.
 
-            Set(foo=0, bar=random.random(), baz= V.x + 2 , glorp=V.x + V.y, want="tails"),
+            Set(foo=0, bar=random.random(), baz=Eval("x + 2"), glorp=Eval("x + y"), want="tails"),
             
-            Echo("want={{ V.want }}"),
+            Echo("want={{ want }}"),
 
             # working on this...
-            # Stop("bar = {{ V.bar }}", when=More(0.9, 0.5))
+            # Stop("bar = {{ bar }}", when="0.9 > 0.5")
 
         )
 
