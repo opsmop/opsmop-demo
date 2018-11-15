@@ -89,7 +89,8 @@ class Demo(Policy):
             Main()
         )
 
-EXPORTED = [
-    Demo()
-]
+def main():
+    return [ Demo() ]
+
+
 

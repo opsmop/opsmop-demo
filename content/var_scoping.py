@@ -63,7 +63,6 @@ class ScopeTest(Policy):
             Two(foosball=3)
         )
 
-EXPORTED = [
-    ScopeTest(blarg=5150)
-]
+def main():
+    return ScopeTest(blarg=5150)
 

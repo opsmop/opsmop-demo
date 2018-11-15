@@ -34,7 +34,6 @@ class Demo(Policy):
         roles = [ WebServers(name='webservers'), ]
         return Roles(*roles)
    
-EXPORTED = [
-    Demo(),
-]
+def main():
+    return [ Demo() ]
 

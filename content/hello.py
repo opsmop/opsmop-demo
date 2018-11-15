@@ -10,7 +10,7 @@ class HelloRole(Role):
 
     def set_resources(self):
         return Resources(
-            File(name="/tmp/foo.txt", from_content="Hello {{ V.program }} World! {{ V.ready }}")
+            File(name="/tmp/foo.txt", from_content="Hello {{ program }} World! {{ say }}")
         )
 
     def set_handlers(self):
@@ -18,13 +18,8 @@ class HelloRole(Role):
 
 class Hello(Policy):
 
-    def set_variables(self):
-        return dict(ready='Congratulations')
-
     def set_roles(self):
         return Roles(HelloRole())
    
-EXPORTED = [
-    Hello(),
-]
-
+def main():
+    return Hello(say='Congratulations')
