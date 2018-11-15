@@ -18,6 +18,9 @@ class HelloRole(Role):
 
 class Hello(Policy):
 
+    def set_variables(self):
+        return dict()
+
     def set_roles(self):
         return Roles(HelloRole())
    
