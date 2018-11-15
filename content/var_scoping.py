@@ -30,12 +30,12 @@ class One(Role):
 
             Echo("Inside the Role 'One', level={{ level }} and should be 'one'"),
 
-			Set(level='runtime'),
+            Set(level='runtime'),
 
-			Resources(
+            Resources(
                 Set(level='nested'),
-				Echo("Inside a nested scope, level={{ level }} and should be 'nested'")
-			),
+                Echo("Inside a nested scope, level={{ level }} and should be 'nested'")
+            ),
 
             Echo("Back outside that scope, level={{ level }} and should be 'runtime'")
         )
@@ -54,7 +54,7 @@ class Two(Role):
             Echo("Policies can be parameterized, blarg={{ blarg }}"),
             Echo("Roles can be parameterized. foosball={{ foosball }} and should be 2 or 3"),
 
-     	    # future feature (soon):
+            # future feature (soon):
             # SetGlobal(blippy='foo'),
             # Echo("Global variables can be set. global_var={{ blippy }}"),
  
