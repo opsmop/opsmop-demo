@@ -16,7 +16,7 @@ post     = "yourhost.example.com/api/opsmop_status"
 #
 #     import os
 #     repo = os.environ("REPO")
-#     filename = os.environ("FILE")
+#     filename = os.environ("FILENAME")
 #
 # and then execute opsmop-pull as:
 #
