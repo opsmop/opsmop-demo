@@ -9,6 +9,9 @@
 # The File module handles all major types of file operations in OpsMop.
 
 from opsmop.core.easy import *
+import getpass
+USERNAME = getpass.getuser()
+
 
 # --------------------------------------------------------------------------------------
 # EXAMPLE: Template
@@ -41,7 +44,7 @@ class CopyExample(Role):
     def set_resources(self):
         return Resources(
              # owner/group/mode can be used with any of these forms, just showing one example here
-             File(name="/tmp/opsmop-demo/foo2.txt", from_file="files/foo.txt", owner='root', mode=0x755),
+             File(name="/tmp/opsmop-demo/foo2.txt", from_file="files/foo.txt", owner=USERNAME, mode=0x755),
              Shell("cat /tmp/opsmop-demo/foo2.txt")
         )    
 
