@@ -17,7 +17,12 @@ USERNAME = getpass.getuser()
 # EXAMPLE: Template
 # SEE_FILE: templates/foo.txt.j2
 #
+# DESCRIPTION
+#
 # Templating a file from a jinja2 template
+#
+# See the official :ref:`Jinja2 documentation <http://jinja.pocoo.org/docs>`_ for full capabilities
+# of Jinja2 templates
 
 class Jinja2TemplateExample(Role):
 
