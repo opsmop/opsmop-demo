@@ -27,6 +27,7 @@ class Jinja2TemplateExample(Role):
     def set_resources(self):
         return Resources(
             # for template language and variable scoping information, please consult the language docs
+            Debug(),
             File(name="/tmp/opsmop-demo/foo1.txt", from_template="templates/foo.txt.j2"),
             Shell("cat /tmp/opsmop-demo/foo1.txt")
         )
@@ -57,8 +58,12 @@ class CopyExample(Role):
 
 class ContentExample(Role):
 
+    def set_variables(self):
+        return dict(a=2, b=2112, c="darmok")
+
     def set_resources(self):
         return Resources(
+             Debug(),
              File(name="/tmp/opsmop-demo/foo3.txt", from_content="Happy Birthday"),
              Shell("cat /tmp/opsmop-demo/foo3.txt"),
              File(name="/tmp/opsmop-demo/foo4.txt", from_content=T("Template test! a={{ a}}")),
