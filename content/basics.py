@@ -10,13 +10,27 @@ from opsmop.core.easy import *
 class WebServers(Role):
 
     def set_variables(self):
-        return dict(dog='fido', code=1234)
+        return dict(what='bar', code=1234)
 
     def set_resources(self):
+
+        # this is not a real example and is just a bunch of resources thrown together
+        # a more complete example installing a popular-application  may be added later.
+
         return Resources(
-            File(name="/tmp/foo.txt", from_content="Hello World!", signals="restart_foo"),
+
+            File(name="/tmp/opsmop-foo.txt", from_content="Hello World!", signals="restart_foo"),
+
+            File(name=T("/tmp/opsmop-{{ what }}.txt"), from_content="Hello World 2!"), # a dynamic path
+
+            Shell("cat /tmp/opsmop-bar.txt", register="bar_contents"),
+
+            Echo("{{ bar_contents.data }}"),
+
             Package(name="cowsay", method="brew", signals="restart_nginx"),
+
             Echo("resources complete!")
+
         )
 
     def set_handlers(self):
