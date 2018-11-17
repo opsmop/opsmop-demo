@@ -1,6 +1,6 @@
 # MODULE:     shell
 # PURPOSE:    runs arbitrary shell commands, with feeling
-# CATEGORY:   generic
+# CATEGORY:   general
 # PROVIDERS:  shell
 # RELATED:    file, package, service, set
 # FYI:        See the online documentation for the full parmameter list

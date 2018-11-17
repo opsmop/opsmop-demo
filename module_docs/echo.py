@@ -2,7 +2,7 @@
 # PURPOSE:    prints strings and status to the user
 # CATEGORY:   special
 # PROVIDERS:  echo
-# RELATED:    debug, template
+# RELATED:    debug, file
 # FYI:        See the online documentation for the full parmameter list
 #
 # DESCRIPTION:

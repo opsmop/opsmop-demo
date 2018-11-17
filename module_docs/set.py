@@ -2,7 +2,7 @@
 # PURPOSE:    adds variables into the OpsMop namespace
 # CATEGORY:   special
 # PROVIDERS:  set
-# RELATED:    template, debug
+# RELATED:    debug, file, echo
 # FYI:        See the online documentation for the full parmameter list
 #
 # DESCRIPTION:
@@ -18,6 +18,10 @@ USERNAME = getpass.getuser()
 
 # --------------------------------------------------------------------------------------
 # EXAMPLE: Basic Example
+#
+# DESCRIPTION:
+#
+# Here we'll set some variables and show some values along the way.
 # =======================================================================================
 
 class BasicExample(Role):

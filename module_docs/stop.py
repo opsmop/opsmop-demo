@@ -1,6 +1,6 @@
 # MODULE:     stop
 # PURPOSE:    stop aborts an execution, sharing a specific message
-# CATEGORY:   generic
+# CATEGORY:   general
 # PROVIDERS:  stop
 # RELATED:    assert
 # FYI:        See the online documentation for the full parmameter list
