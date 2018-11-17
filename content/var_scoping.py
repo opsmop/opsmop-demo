@@ -25,9 +25,9 @@ class One(Role):
             # SetGlobal(blippy='foo'),
             Resources(
                 Set(level='nested'),
-                # Assert(level='nested'),
+                # Asserts(level='nested'),
             ),
-            Assert(level='runtime'),
+            Asserts(level='runtime'),
         )
 
 # ==============================================================================
@@ -42,7 +42,7 @@ class Two(Role):
         return Resources(
             Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
             Echo("foosball={{ foosball }}"),
-            # Assert(blippy='foo'),   
+            # Asserts(blippy='foo'),   
             Asserts(blarg=5150, level='two'),
             # some alternate ways to do things, more as a proof of internals
             Asserts('blarg > 3000'),
