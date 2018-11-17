@@ -29,7 +29,7 @@ class Main(Role):
             File(name="/tmp/foo3.txt", from_file="files/foo3.txt", signals='file3changed'),
 
             # DEMO: Variables in strings and templates! F is for facts, V is for variables.
-            Echo("the OS distribution is {{ F.os_type }}"),
+            Echo("the OS distribution is {{ Facts.os_type() }}"),
             Echo("the value of x is {{ x }}"),
 
             # DEMO: basic and advanced conditional tests
@@ -37,7 +37,7 @@ class Main(Role):
             Echo("x is true at run time", when='x'),
             Echo("a > b", when="a > b"),
             Echo("c says go", when="c == 'says_go'"),
-            Echo("this is unix? {{ F.os_type }}"),
+            Echo("this is unix? {{ Facts.os_type() }}"),
             Echo("all are true?", when="e and f and g"),
             Echo("one is true?", when="e or f or g"),
 

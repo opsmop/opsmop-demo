@@ -1,28 +1,30 @@
-# MODULE:          file
-# CATEGORY:        general
-# PROVIDERS:       file
-# RELATED_MODULES: directory
-# FYI:             See the online documentation at http://opsmop.io/modules.html for the full parameter list
+# MODULE:     file
+# PURPOSE:    copies files, changes modes, renders templates, deletes files, slices, dices
+# CATEGORY:   general
+# PROVIDERS:  file
+# RELATED:    directory
+# FYI:        See the online documentation for the full parmameter list
 #
-# DESCRIPTION
+# DESCRIPTION:
 # 
 # The File module handles all major types of file operations in OpsMop.
+# =======================================================================================
 
 from opsmop.core.easy import *
 import getpass
 USERNAME = getpass.getuser()
 
-
 # --------------------------------------------------------------------------------------
 # EXAMPLE: Template
 # SEE_FILE: templates/foo.txt.j2
 #
-# DESCRIPTION
+# DESCRIPTION:
 #
 # Templating a file from a jinja2 template
 #
-# See the official :ref:`Jinja2 documentation <http://jinja.pocoo.org/docs>`_ for full capabilities
+# See the official `Jinja2 documentation <http://jinja.pocoo.org/docs>`_ for full capabilities
 # of Jinja2 templates
+# =======================================================================================
 
 class Jinja2TemplateExample(Role):
 
@@ -41,9 +43,10 @@ class Jinja2TemplateExample(Role):
 # --------------------------------------------------------------------------------------
 # EXAMPLE: Copy
 #
-# DESCRIPTION
+# DESCRIPTION:
 #
 # Copying a file with owner, permission, and mode
+# =======================================================================================
 
 class CopyExample(Role):
 
@@ -57,9 +60,10 @@ class CopyExample(Role):
 # --------------------------------------------------------------------------------------
 # EXAMPLE: Copy From String
 #
-# DESCRIPTION
+# DESCRIPTION:
 #
 # For very small files, this is also possible
+# =======================================================================================
 
 class ContentExample(Role):
 
@@ -75,12 +79,13 @@ class ContentExample(Role):
              Shell("cat /tmp/opsmop-demo/foo4.txt")
         )
 
-# --------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 # EXAMPLE: Deleting a File
 #
-# DESCRIPTION
+# DESCRIPTION:
 #
 # Ensure that a file does not exist
+# =======================================================================================
 
 class AbsentExample(Role):
 
@@ -93,8 +98,9 @@ class AbsentExample(Role):
         )
 
 
-# --------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 # SETUP: a helper role that sets up for this demo
+# =======================================================================================
 
 class CommonSetup(Role):
 
@@ -103,8 +109,9 @@ class CommonSetup(Role):
               Directory(name="/tmp/opsmop-demo/")
         )
 
-# --------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles
+# =======================================================================================
 
 class Demo(Policy):
 
