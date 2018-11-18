@@ -2,7 +2,7 @@
 # PURPOSE:    stop aborts an execution, sharing a specific message
 # CATEGORY:   general
 # PROVIDERS:  stop
-# RELATED:    assert
+# RELATED:    asserts
 # FYI:        See the online documentation for the full parmameter list
 #
 # DESCRIPTION:
