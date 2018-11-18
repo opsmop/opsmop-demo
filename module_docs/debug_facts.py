@@ -7,10 +7,12 @@
 #
 # DESCRIPTION:
 # 
-# The DebugFacts values show all the current values of the constant facts available
+# The DebugFacts module shows most of the values of the basic facts available
 # within OpsMop. It is important to remember that OpsMop facts are not all constants,
-# and some useful facts takes parameters.  The Debug facts module will not dump
-# all of those values.  See :ref:`facts` for the full list of available facts.
+# and some useful facts take parameters.  The DebugFacts module will not dump
+# those facts that take parameters. See :ref:`facts` for the full list of available facts.
+# Using the DebugFacts modules is a great way to figure out what Fact to use in a
+# template, or what value to check against in a conditional.
 # =======================================================================================
 
 from opsmop.core.easy import *
