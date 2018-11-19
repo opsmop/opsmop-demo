@@ -39,15 +39,22 @@ class Two(Role):
 
     def set_resources(self):
 
-        return Resources(
+        res = Resources()
+
+        res.add([
             Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
-            Echo("foosball={{ foosball }}"),
+            Echo("foosball={{ foosball }}")
+        ])
+
+        res.add([
             # Asserts(blippy='foo'),   
             Asserts(blarg=5150, level='two'),
             # some alternate ways to do things, more as a proof of internals
             Asserts('blarg > 3000'),
             Debug('blarg', 'foosball', random=Eval('2 * blarg + 1000'))
-        )
+        ])
+
+        return res
 
 # ==============================================================================
 

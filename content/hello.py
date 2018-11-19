@@ -19,11 +19,13 @@ class HelloRole(Role):
         msg = T("Hello {{ program }} World! {{ say}}!")
 
         return Resources(
-            File(name="/tmp/foo.txt", from_content=msg)
+            File(name="/tmp/foo.txt", from_content=msg, signals="file_changed")
         )
 
     def set_handlers(self):
-        return Handlers()
+        return Handlers(
+            file_changed = Echo("file has changed")
+        )
 
 # -----------------
 
