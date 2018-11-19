@@ -19,7 +19,7 @@ class One(Role):
     def set_resources(self):
 
         return Resources(
-            Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
+            Debug(),
             Asserts(foosball=1, glorp='fizz', blarg=5150, other=True, level='one'),
             Set(level='runtime'),
             # SetGlobal(blippy='foo'),
@@ -42,7 +42,7 @@ class Two(Role):
         res = Resources()
 
         res.add([
-            Debug('foosball', 'glorp', 'blarg', 'other', 'level'),
+            Debug(),
             Echo("foosball={{ foosball }}")
         ])
 
