@@ -34,7 +34,7 @@ class BasicExample(Role):
             Debug(),
             Set(a=5, b=2112, c="ood", d=8675309),
             Debug(),
-            Set(e=Eval('a+b'), f=Eval('c.upper()'), g=Facts.os_type()),
+            Set(e=Eval('a+b'), f=Eval('c.upper()'), g=Platform.system()),
             Debug(),
             Echo("The values are now, {{ e }}, {{ f }}, and {{ g }}")
         )

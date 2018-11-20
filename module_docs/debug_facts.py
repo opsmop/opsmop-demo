@@ -34,7 +34,7 @@ class BasicExample(Role):
 
     def set_resources(self):
         return Resources(
-            Echo("I am a {{ Facts.system() }} system"),
+            Echo("I am a {{ Platform.system() }} system"),
             DebugFacts(),
         )
 

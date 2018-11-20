@@ -28,8 +28,8 @@ class Main(Role):
             File(name="/tmp/foo2.txt", from_file="files/foo2.txt", signals='file2changed'),
             File(name="/tmp/foo3.txt", from_file="files/foo3.txt", signals='file3changed'),
 
-            # DEMO: Variables in strings and templates! F is for facts, V is for variables.
-            Echo("the OS distribution is {{ Facts.system() }}"),
+            # DEMO: Variables in strings and templates! Use of Platform facts!
+            Echo("the OS distribution is {{ Platform.system() }}"),
             Echo("the value of x is {{ x }}"),
 
             # DEMO: basic and advanced conditional tests
@@ -37,7 +37,7 @@ class Main(Role):
             Echo("x is true at run time", when='x'),
             Echo("a > b", when="a > b"),
             Echo("c says go", when="c == 'says_go'"),
-            Echo("this is unix? {{ Facts.system() }}"),
+            Echo("this is unix? {{ Platform.system() }}"),
             Echo("all are true?", when="e and f and g"),
             Echo("one is true?", when="e or f or g"),
             Echo("this will not happen", when="a > 99999999"),
@@ -60,9 +60,8 @@ class Main(Role):
             # at load time, and any Python is fair game. Remember to access anything set with
             # Set() we have to use Jinja2 expressions in quotes, otherwise we don't need to.
 
-            Set(foo=0, bar=random.random(), baz=Eval("x + 2"), glorp=Eval("x + y"), want="tails"),
-            
-            Echo("want={{ want }}"),
+            Set(foo=0, bar=random.random(), baz=Eval("x + 2"), glorp=Eval("x + y"), want="tails", truth=Eval("False")),
+            Echo("want={{ want }}, glorp = {{ glorp }}", when=Eval('truth')),
 
             # working on this...
             # Stop("bar = {{ bar }}", when="0.9 > 0.5")

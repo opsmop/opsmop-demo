@@ -1,0 +1,6 @@
+{
+    "feature_flags" : {
+        "ff01" : true,
+        "ff02" : false
+    }
+}

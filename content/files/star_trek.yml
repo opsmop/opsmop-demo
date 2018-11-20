@@ -1,0 +1,9 @@
+warp_factor: 9
+phasers: "stun"
+photon_torpedos: "spread pattern"
+tea: "Earl Grey, Hot"
+crew:
+  officers:
+    security: 'Worf'
+    science: 'Data'
+  captain: 'Picard'

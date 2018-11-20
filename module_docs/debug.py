@@ -35,8 +35,8 @@ class BasicExample(Role):
             Debug(),
             # just show some things
             Debug('a', 'b', 'c'),
-            # also debug some evaluated results or Facts
-            Debug('a', 'b', 'c', os_type=Facts.os_type(), expr=Eval('a + 1000'))
+            # also debug some evaluated results and platform Facts
+            Debug('a', 'b', 'c', os_type=Platform.system(), expr=Eval('a + 1000'))
         )
 
 
