@@ -1,14 +1,14 @@
 # MODULE:     directory
 # PURPOSE:    creates directories, removes them, and modifies metadata
 # CATEGORY:   general
-# PROVIDERS:  file
-# RELATED:    directory
+# PROVIDERS:  directory
+# RELATED:    file
 # FYI:        See the online documentation for the full parmameter list
 #
 # DESCRIPTION:
 # 
-# The Directory module has all of the capabilities of the file module, but is
-# used for directories instead of files.
+# The Directory module is very similar to the file module, but obviously 
+# for directories, and not files.
 # =======================================================================================
 
 from opsmop.core.easy import *
