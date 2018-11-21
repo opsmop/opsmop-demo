@@ -8,7 +8,7 @@ USERNAME = getpass.getuser()
 class FeatureOne(Role):
 
     def should_process_when(self):
-        return UserFacts.get('feature_flags','ff01')
+        return UserFacts.get('feature_flags').get('ff01', False)
 
     def set_resources(self):
 
@@ -24,7 +24,7 @@ class FeatureOne(Role):
 class FeatureTwo(Role):
 
     def should_process_when(self):
-        return UserFacts.feature_flags.get('ff02',False)
+        return UserFacts.feature_flags.get('ff02', False)
 
     def set_resources(self):
         return Resources(
