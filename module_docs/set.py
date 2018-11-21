@@ -34,7 +34,9 @@ class BasicExample(Role):
             Debug(),
             Set(a=5, b=2112, c="ood", d=8675309),
             Debug(),
-            Set(e=Eval('a+b'), f=Eval('c.upper()'), g=Platform.system()),
+            Set(e=Eval('a+b'), f=Eval('c.upper()'), g=Platform.system(), rand=Chaos.random()),
+            Debug(),
+            Echo("sometimes this will print, but not always", when=Eval('rand > 0.5')),
             Debug(),
             Echo("The values are now, {{ e }}, {{ f }}, and {{ g }}")
         )
