@@ -16,8 +16,8 @@ class FeatureOne(Role):
 
         return Resources(
             DebugFacts(),
-            Echo("The security offer is {{ UserFacts.crew.officers.security }}"),
-            Set(command=command),
+            Echo("The security officer is {{ UserFacts.crew.officers.security }}"),
+            Set(command=command), # copy python var into scope
             Echo("The singularity is becoming unstable. {{ command }}")
         )
 
