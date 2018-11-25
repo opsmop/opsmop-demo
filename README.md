@@ -1,9 +1,9 @@
 OpsMop Demo
 ===========
 
-Demo content for bin/opsmop and (soon) bin/opsmop-pull
+Demo content for bin/opsmop and (soon) push and pull mode variants.
 
-First install [OpsMop](https://github.com/vespene-io/opsmop).
+First install [OpsMop](https://github.com/opsmop/opsmop).
 
 Local Mode Usage
 ================
@@ -19,40 +19,6 @@ Dry-run mode:
 Apply configuration:
 
     opsmop apply content/hello.py
-
-Pull Mode Usage
-===============
-
-Pending Soon!
-
-opsmop-pull is a pluggable system for fetching remote content and running policy, then remoting status remotely.
-It is designed for maximum efficiency.
-
-There are actually four types of plugins involved:
-    * Transports - where to get the content (Git, s3, etc)
-    * Signals - when to decide to get new content (NoSignals, SQS, RabbitMQ, etc)
-    * CliCallbacks - format standard output - the default CLI output is fine
-    * PullStatusCallbacks - send status to remote systems (RestPost, etc)
-
-To understand the configuration, see this python file:
-
-    cat config/pull.py
-
-Usage is simple.  Here's the single-shot dry-run mode:
-
-    opsmop-pull check config/pull.py
-
-Single-shot apply configuration (cron, etc):
-
-    opsmop-pull apply config/pull.py
-
-Constantly monitor (systemd, etc):
-
-    opsmop-pull watch-check config/pull.py
-
-Constantly apply (systemd, etc):
-
-    opsmop-pull watch-apply config/pull.py
 
 License
 =======
