@@ -1,7 +1,7 @@
 # MODULE:     service
 # PURPOSE:    starts/stops and enables/disables services
 # CATEGORY:   general
-# PROVIDERS:  providers.brew
+# PROVIDERS:  providers.brew, providers.systemd
 # RELATED:    file, package
 # FYI:        See the online documentation for the full parmameter list
 #
