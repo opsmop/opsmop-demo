@@ -1,14 +1,13 @@
-# MODULE:     user
-# PURPOSE:    manages user accounts
+# MODULE:     groups
+# PURPOSE:    manages user groups
 # CATEGORY:   general
-# PROVIDERS:  user.useradd
-# RELATED:    group
+# PROVIDERS:  group.groupadd
+# RELATED:    user
 # FYI:        See the online documentation for the full parmameter list
 #
 # DESCRIPTION:
 # 
-# The user module manages user accounts. Certain parameters can only be set at creation time.
-# Also see the group module for additional capabilities.
+# Manages groups. To control what users are in what groups, see :ref:`module_user`.
 # =======================================================================================
 
 from opsmop.core.easy import *
@@ -18,7 +17,7 @@ from opsmop.core.easy import *
 #
 # DESCRIPTION:
 #
-# Creating and removing some users
+# Basic group operations.
 # =======================================================================================
 
 class BasicExample(Role):
@@ -28,10 +27,10 @@ class BasicExample(Role):
 
     def set_resources(self):
         return Resources(
-            User(name="opsmguest1"),
-            User(name="opsmguest2", uid=3003, group="sudo", groups=['vespene'], shell="/bin/bash"),
-            User(name="opsmguest3", system=True),
-            User(name="opsmguest1", absent=True)
+            Group(name="opsmgrp1"),
+            Group(name="opsmgrp2", gid=8008),
+            Group(name="opsmgrp3", system=True),
+            Group(name="opsmgrp1", absent=True)
         )
 
 
