@@ -1,7 +1,7 @@
 # MODULE:     package
 # PURPOSE:    installs, removes, and upgrades packages
 # CATEGORY:   general
-# PROVIDERS:  package.apt, package.brew, package.yum
+# PROVIDERS:  package.apt, package.brew, package.yum, package.dnf
 # RELATED:    file, service
 # FYI:        See the online documentation for the full parmameter list
 #
