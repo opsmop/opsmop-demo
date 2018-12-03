@@ -31,6 +31,9 @@ class BasicExample(Role):
 
     def set_resources(self):
         return Resources(
+
+            DebugFacts(),
+
             # more provider types are coming soon.
             # Package(name='pygments', method='pip'), 
 

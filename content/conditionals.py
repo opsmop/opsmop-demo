@@ -50,7 +50,7 @@ class Main(Role):
             ),
  
             # DEMO: use results in subsequent methods
-            Shell(cmd="date", register="date", ignore_errors=True),
+            Shell(cmd="date", register="date"),
             Echo("shell output was {{ date.data }}"),
             Echo("the shell command was ok", when="date.rc == 0"),
 
