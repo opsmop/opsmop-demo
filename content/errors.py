@@ -1,7 +1,6 @@
 # a simple demo showing how to ignore and manipulate the error status of the shell command
 
-from opsmop.core.easy import *
-import random 
+from opsmop.core.easy import * 
 
 class Main(Role):
 
