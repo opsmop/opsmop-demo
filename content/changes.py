@@ -17,8 +17,8 @@ class Main(Role):
 
         return Resources(
             
-            Shell("echo 'fence power down'", register='z', changed_when=VELOCIRAPTOR_DANGER, signals='evt_01'),
-            Shell("echo 'all good'", register='z', changed_when=VELOCIRAPTOR_DANGER, signals='evt_02'),
+            Shell("echo 'fence power down'", register='z', ignore_errors=True, changed_when=VELOCIRAPTOR_DANGER, signals='evt_01'),
+            Shell("echo 'all good'", register='z', ignore_errors=True, changed_when=VELOCIRAPTOR_DANGER, signals='evt_02'),
         )
 
 
