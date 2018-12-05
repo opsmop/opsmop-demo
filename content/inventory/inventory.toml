@@ -1,0 +1,47 @@
+# inventory is a concept only needed by pull mode
+# (this is a work in progress)
+
+# define a group like this...
+# * each entry is a hostname and a set of variables to apply to that host
+# * one gotcha: in TOML, IPs need to be quoted
+
+[groups.group1.hosts]
+hostname1   = "d=7 e=8 f=9"
+"127.0.0.1" = "d=7 e=8 f=10"
+
+# lets define another group.
+# variables are optional, to avoid setting variables use a blank string
+
+[groups.group2.hosts]
+hostname2 = ""
+hostname3 = ""
+
+# variables can also be applied at the group level, like this...
+# these variables can be highly structured but here we are just showing basics
+
+[groups.group2.vars]
+a=1
+b=2
+c=3
+
+[groups.group1.vars]
+a=4
+b=5
+c=6
+
+# here is an alternate way to define host variables
+# it probably won't be used very much because it is somewhat verbose
+# but other inventory sources might not care
+
+[hosts.hostname1.vars]
+g=10
+h=11
+
+# the all group is magic and assigns variables to all groups
+# the variable 'opsmop_host' is special and overrides the contact address of a host name
+# we are using it to simulate a larger fleet with only one box.
+
+[groups.all.vars]
+opsmop_host="127.0.0.1"
+
+

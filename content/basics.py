@@ -1,11 +1,8 @@
-# This is OpsMop
-# (C) Michael DeHaan LLC <michael@michaeldehaan.net>, 2018.
-# License: GPLv3
-
 from opsmop.core.easy import *
 
-# bin/opsmop check filename.py
-# bin/opsmop apply filename.py
+# bin/opsmop --validate filename.py
+# bin/opsmop --check filename.py
+# bin/opsmop --apply filename.py
 
 class WebServers(Role):
 
