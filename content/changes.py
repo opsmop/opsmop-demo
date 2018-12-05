@@ -13,19 +13,19 @@ class Main(Role):
 
     def set_resources(self):
 
-        MATCHED_OUTPUT = Eval("z.rc == 7 or 'fence power down' in z.data")
+        VELOCIRAPTOR_DANGER = Eval("z.rc == 7 or 'fence power down' in z.data")
 
         return Resources(
             
-            Shell("echo 'fence power down'", register='z', changed_when=MATCHED_OUTPUT, signals='evt_01'),
-            Shell("echo 'all good'", register='z', changed_when=MATCHED_OUTPUT, signals='evt_02'),
+            Shell("echo 'fence power down'", register='z', changed_when=VELOCIRAPTOR_DANGER, signals='evt_01'),
+            Shell("echo 'all good'", register='z', changed_when=VELOCIRAPTOR_DANGER, signals='evt_02'),
         )
 
 
     def set_handlers(self):
         return Handlers(
-            evt_01 = Echo("evt_01"),
-            evt_02 = Echo("evt_02")
+            evt_01 = Echo("Sound the alarm!"),
+            evt_02 = Echo("Sound the alarm, also!"),
         )
 
 class Demo(Policy):
