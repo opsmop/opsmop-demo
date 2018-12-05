@@ -26,7 +26,7 @@ class Main(Role):
             # conditionally deciding when to ignore errors
             Shell("/usr/bin/false", register='y', failed_when=Eval('y.rc !=0 and not c')),
 
-            # considering the output to decide when to fail
+            # considering the output to decide when to fail, also showing the condition assigned to a variable
             Shell("echo hi", register='z', failed_when=MATCHED_OUTPUT)
         )
 
