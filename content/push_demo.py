@@ -8,12 +8,12 @@ from opsmop.core.easy import *
 # for push usage
 #   bin/opsmop-push --apply filename.py
     
-Inventory.load(TomlInventory("inventory/inventory.toml"))
+inventory = TomlInventory("inventory/inventory.toml")
 
 class WebServers(Role):
 
     def push_to(self):
-        return Inventory.filter('webservers*')
+        return inventory.filter('webservers*')
 
     def set_variables(self):
         return dict(what='bar', code=1234)
