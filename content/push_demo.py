@@ -7,8 +7,13 @@ from opsmop.core.easy import *
 #   bin/opsmop --apply filename.py
 # for push usage
 #   bin/opsmop-push --apply filename.py
+    
+Inventory.load(TomlInventory("inventory/inventory.toml"))
 
 class WebServers(Role):
+
+    def push_to(self):
+        return Inventory.filter('webservers*')
 
     def set_variables(self):
         return dict(what='bar', code=1234)
@@ -34,14 +39,5 @@ class Demo(Policy):
         )
    
 def main():
-
-    # the inventory is global and you can load as many inventories as you want
-
-    inventory = TomlInventory().load("inventory/inventory.toml")
-    # inventory.map(group='webservers', tag='webservers')
-
-    # now return the policies that you want to use in local mode (with --tags)
-    # or in push mode (the tags will be automatically applied)
-
     return [ Demo() ]
 
