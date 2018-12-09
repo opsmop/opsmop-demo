@@ -5,6 +5,9 @@
 # * each entry is a hostname and a set of variables to apply to that host
 # * one gotcha: in TOML, IPs need to be quoted
 
+[groups.webservers.hosts]
+example1234 = "opsmop_host=192.168.48.143"
+
 [groups.group1.hosts]
 hostname1   = "d=7 e=8 f=9"
 "127.0.0.1" = "d=7 e=8 f=10"

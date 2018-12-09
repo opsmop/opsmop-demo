@@ -1,0 +1,15 @@
+# the first file found will be read in:
+# 
+#  ~/.opsmop/defaults.toml
+#  /etc/opsmop/defaults.toml
+#
+# these values can be overriden in policy files on a per-role basis.
+
+[ssh]
+default_username="opsmop"
+# default_password="opsmop"
+
+[sudo]
+default_username="root"
+# default_password=""
+
