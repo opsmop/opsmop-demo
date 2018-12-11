@@ -71,7 +71,7 @@ class Demo(Policy):
            BasicExample(),
        )
 
-def main():
-    return [ Demo() ]
+if __name__ == '__main__':
+    Cli(Demo())
 
 

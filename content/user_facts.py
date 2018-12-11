@@ -64,10 +64,8 @@ class Demo(Policy):
            FeatureTwo(),
        )
 
-def main():
-    policies = [ Demo() ]
-    return policies
-
+if __name__ == '__main__':
+    Cli(Demo())
 
 
 

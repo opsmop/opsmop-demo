@@ -36,6 +36,6 @@ class Hello(Policy):
 
     def set_roles(self):
         return Roles(HelloRole())
-   
-def main():
-    return Hello(say='Congratulations')
+
+if __name__ == '__main__':
+    Cli(Hello(say='Congratulations'))

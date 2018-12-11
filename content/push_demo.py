@@ -3,10 +3,9 @@
 
 from opsmop.core.easy import *
 
-# for local usage:
-#   bin/opsmop --apply filename.py
-# for push usage
-#   bin/opsmop-push --apply filename.py
+# cd thisdir
+# python3 push_demo.py --push --check
+# python3 push_demo.py --push --apply
     
 inventory = TomlInventory("inventory/inventory.toml")
 
@@ -51,6 +50,6 @@ class Demo(Policy):
             WebServers(name='webservers', tag='webservers')
         )
    
-def main():
-    return [ Demo() ]
+if __name__ == '__main__':
+    Cli(Demo())
 

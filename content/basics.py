@@ -1,8 +1,8 @@
 from opsmop.core.easy import *
 
-# bin/opsmop --validate filename.py
-# bin/opsmop --check filename.py
-# bin/opsmop --apply filename.py
+# cd thisdir
+# python3 basics.py --local --check
+# python3 basics.py --local --apply
 
 class WebServers(Role):
 
@@ -45,6 +45,6 @@ class Demo(Policy):
         roles = [ WebServers(name='webservers'), ]
         return Roles(*roles)
    
-def main():
-    return [ Demo() ]
+if __name__ == '__main__':
+    Cli(Demo())
 

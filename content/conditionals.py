@@ -90,8 +90,8 @@ class Demo(Policy):
             Main()
         )
 
-def main():
-    return [ Demo() ]
+if __name__ == '__main__':
+    Cli(Demo())
 
 
 

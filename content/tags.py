@@ -6,12 +6,13 @@
 #
 # try the following:
 #
-# opsmop --apply tags.py --tags a
-# opsmop --apply tags.py --tags a,b
-# opsmop --apply tags.py --tags c
-# opsmop --apply tags.py --tags d 
-# opsmop --apply tags.py --tags e
-# opsmop --apply tags.py
+# cd thisdir
+# python3 tags.py --local --apply --tags a
+# python3 tags.py --local --apply --tags a,b
+# python3 tags.py --local --apply --tags c
+# python3 tags.py --local --apply --tags d 
+# python3 tags.py --local --apply --tags e
+# python3 tags.py --local --apply
 #
 # what resources do you think will run in each invocation?
 

@@ -70,6 +70,6 @@ class ScopeTest(Policy):
             Two(foosball=3)
         )
 
-def main():
-    return ScopeTest(blarg=5150)
+if __name__ == '__main__':
+    Cli(ScopeTest(blarg=5150))
 
