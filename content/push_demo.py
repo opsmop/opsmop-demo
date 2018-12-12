@@ -7,7 +7,7 @@ from opsmop.core.easy import *
 # python3 push_demo.py --push --check
 # python3 push_demo.py --push --apply
     
-inventory = TomlInventory("inventory/inventory.toml")
+inventory = None
 
 class BaseRole(Role):
 
@@ -51,5 +51,6 @@ class Demo(Policy):
         )
    
 if __name__ == '__main__':
+    inventory = TomlInventory("inventory/inventory.toml")
     Cli(Demo())
 
