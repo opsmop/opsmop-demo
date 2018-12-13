@@ -33,21 +33,29 @@ class WebServers(Role):
     def set_resources(self):
         return Resources(
             Debug(),
-            File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
 			File("/tmp/foo3.txt", from_content="Hey!"),
             File("/tmp/foo1.txt", from_template="templates/foo.j2"),
             Shell("uname -a")
         )
 
     def set_handlers(self):
-        return Handlers(
-        )
+        return Handlers()
 
     def allow_fileserving_paths(self):
         # this is optional, the default is just '.' which means where this file is
         # if you want to allow things like from_file='/opt/foo/bar.txt'
 		# return [ '.', '/opt/foo' ]
         return [ '.' ]
+
+class AnotherRole(Role):
+
+    def inventory(self):
+        return inventory.filter('webservers*', 'dbservers*')
+
+    def set_resources(self):
+        return Resources(
+             File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
+        )
 
 class Demo(Policy):
 
@@ -56,7 +64,8 @@ class Demo(Policy):
 
     def set_roles(self):
         return Roles(
-            WebServers(name='webservers', tag='webservers')
+            WebServers(name='webservers', tag='webservers'),
+            AnotherRole(tag='another')
         )
 
     def allow_fileserving_patterns(self):
