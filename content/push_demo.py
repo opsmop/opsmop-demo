@@ -28,11 +28,14 @@ class WebServers(Role):
         return inventory.filter('webservers*')
 
     def set_variables(self):
-        return dict(what='bar', code=1234)
+        return dict(x=5, y=6)
 
     def set_resources(self):
         return Resources(
             Debug(),
+            File("/tmp/foo1.txt", from_template="templates/foo.j2"),
+            File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
+			File("/tmp/foo3.txt", from_content="Hey!"),
             Shell("uname -a")
         )
 
