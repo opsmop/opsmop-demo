@@ -33,15 +33,21 @@ class WebServers(Role):
     def set_resources(self):
         return Resources(
             Debug(),
-            File("/tmp/foo1.txt", from_template="templates/foo.j2"),
             File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
 			File("/tmp/foo3.txt", from_content="Hey!"),
+            File("/tmp/foo1.txt", from_template="templates/foo.j2"),
             Shell("uname -a")
         )
 
     def set_handlers(self):
         return Handlers(
         )
+
+    def allow_fileserving_paths(self):
+        # this is optional, the default is just '.' which means where this file is
+        # if you want to allow things like from_file='/opt/foo/bar.txt'
+		# return [ '.', '/opt/foo' ]
+        return [ '.' ]
 
 class Demo(Policy):
 
@@ -52,6 +58,14 @@ class Demo(Policy):
         return Roles(
             WebServers(name='webservers', tag='webservers')
         )
+
+    def allow_fileserving_patterns(self):
+        # this is totally optional, the default is '*'
+        return [ '*.txt', '*.j2' ]
+
+    def deny_fileserving_patterns(self):
+        # this is also optional, the defaults are already set
+        return Policy.DEFAULT_DENY_FILESERVING_PATTERNS
    
 if __name__ == '__main__':
     inventory = TomlInventory("inventory/inventory.toml")
