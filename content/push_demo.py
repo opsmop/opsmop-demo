@@ -23,7 +23,7 @@ class BaseRole(Role):
         return ('root', None)
 
 class WebServers(Role):
-
+    
     def inventory(self):
         return inventory.filter(groups='webservers*')
 
@@ -35,7 +35,7 @@ class WebServers(Role):
             Debug(),
 			File("/tmp/foo3.txt", from_content="Hey!", signals='evt_01'),
             File("/tmp/foo1.txt", from_template="templates/foo.j2", signals='evt_02'),
-            Shell("uname -a"),
+            Shell("uname -a", changed_when=False),
         )
 
     def set_handlers(self):
@@ -58,6 +58,26 @@ class WebServers(Role):
 
 class AnotherRole(Role):
 
+    # this example demonstrates load balancing hooks
+    def should_contact(self, host):
+        # optional. this is like should_process_when but executes before we try to connect to the host
+        return True
+    
+    def after_contact(self, host):
+        # optional. hook that can be used to put a node back in a load balancer, etc
+        # print("balance %s" % host.hostname())
+        pass    
+
+    def before_contact(self, host):
+        # optional hook. that can be used to pull a node out of a load balancer, etc
+        # print("unbalance %s" % host.hostname())
+        pass
+
+    def serial(self):
+        # number of hosts to process at once
+        return 5
+
+
     def inventory(self):
         return inventory.filter(groups=['webservers*','dbservers*'])
 
@@ -65,6 +85,7 @@ class AnotherRole(Role):
         return Resources(
              Echo("hi"),
              File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
+             Echo("??")
         )
 
 class Demo(Policy):

@@ -7,6 +7,7 @@
 
 [groups.webservers.hosts]
 example1234 = "opsmop_host=192.168.48.143"
+"127.0.0.1" = ""
 
 [groups.group1.hosts]
 hostname1   = "d=7 e=8 f=9"
