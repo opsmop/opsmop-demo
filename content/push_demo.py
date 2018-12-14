@@ -25,7 +25,7 @@ class BaseRole(Role):
 class WebServers(Role):
 
     def inventory(self):
-        return inventory.filter('webservers*')
+        return inventory.filter(groups='webservers*')
 
     def set_variables(self):
         return dict(x=5, y=6)
@@ -33,12 +33,21 @@ class WebServers(Role):
     def set_resources(self):
         return Resources(
             Debug(),
-			File("/tmp/foo3.txt", from_content="Hey!"),
-            File("/tmp/foo1.txt", from_template="templates/foo.j2"),
-            Shell("uname -a")
+			File("/tmp/foo3.txt", from_content="Hey!", signals='evt_01'),
+            File("/tmp/foo1.txt", from_template="templates/foo.j2", signals='evt_02'),
+            Shell("uname -a"),
         )
 
     def set_handlers(self):
+        return Handlers(
+            evt_01 = Resources(
+               Echo("one"),
+               Echo("two")
+            ),
+            evt_02 = Resources(
+               Echo("three")
+            )
+        )
         return Handlers()
 
     def allow_fileserving_paths(self):
@@ -50,10 +59,11 @@ class WebServers(Role):
 class AnotherRole(Role):
 
     def inventory(self):
-        return inventory.filter('webservers*', 'dbservers*')
+        return inventory.filter(groups=['webservers*','dbservers*'])
 
     def set_resources(self):
         return Resources(
+             Echo("hi"),
              File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
         )
 
@@ -67,6 +77,7 @@ class Demo(Policy):
             WebServers(name='webservers', tag='webservers'),
             AnotherRole(tag='another')
         )
+
 
     def allow_fileserving_patterns(self):
         # this is totally optional, the default is '*'
