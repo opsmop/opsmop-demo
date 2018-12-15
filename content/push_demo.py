@@ -28,7 +28,7 @@ class WebServers(Role):
         return inventory.filter(groups='webservers*')
 
     def set_variables(self):
-        return dict(x=5, y=6)
+        return dict(x=5, y=6, z=7)
 
     def set_resources(self):
         return Resources(

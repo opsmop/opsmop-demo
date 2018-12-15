@@ -6,12 +6,12 @@
 # * one gotcha: in TOML, IPs need to be quoted
 
 [groups.webservers.hosts]
-example1234 = "opsmop_host=192.168.48.143"
+example1234 = "opsmop_host=192.168.48.143 z=3002"
 "127.0.0.1" = ""
 
 [groups.group1.hosts]
-hostname1   = "d=7 e=8 f=9"
-"127.0.0.1" = "d=7 e=8 f=10"
+hostname1   = "d=7 e=8 f=9 z=3001"
+"127.0.0.1" = "d=7 e=8 f=10 z=3000"
 
 # lets define another group.
 # variables are optional, to avoid setting variables use a blank string
