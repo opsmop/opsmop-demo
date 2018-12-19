@@ -22,7 +22,7 @@ class BaseRole(Role):
         # if required, a password can be read from ~/.opsmop/defaults.toml
         return ('root', None)
 
-class WebServers(Role):
+class WebServers(BaseRole):
     
     def inventory(self):
         return inventory.filter(groups='webservers*')
@@ -56,7 +56,7 @@ class WebServers(Role):
 		# return [ '.', '/opt/foo' ]
         return [ '.' ]
 
-class AnotherRole(Role):
+class AnotherRole(BaseRole):
 
     # this example demonstrates load balancing hooks
     def should_contact(self, host):

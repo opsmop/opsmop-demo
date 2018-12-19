@@ -47,5 +47,5 @@ h=11
 
 [groups.all.vars]
 opsmop_host="127.0.0.1"
-
+opsmop_python_path="/usr/bin/python3"
 
