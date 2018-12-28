@@ -80,6 +80,26 @@ class ContentExample(Role):
         )
 
 # ---------------------------------------------------------------------------------------
+# EXAMPLE: Downloading a File
+#
+# DESCRIPTION:
+#
+# Grabbing a file from a web location
+# =======================================================================================
+
+class FromUrlExample(Role):
+
+
+    def set_resources(self):
+        
+        src = "https://raw.githubusercontent.com/opsmop/opsmop/master/README.md"
+        
+        return Resources(
+             File(name="/tmp/opsmop-demo/foo5.txt", from_url=src, overwrite=False)
+        )
+
+
+# ---------------------------------------------------------------------------------------
 # EXAMPLE: Deleting a File
 #
 # DESCRIPTION:
@@ -121,6 +141,7 @@ class Demo(Policy):
            Jinja2TemplateExample(d=4, e=5, f=6),
            CopyExample(),
            ContentExample(),
+           FromUrlExample(),
            AbsentExample()
        )
 
