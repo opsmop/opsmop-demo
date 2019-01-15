@@ -1,24 +1,7 @@
 OpsMop Demo
 ===========
 
-Demo content for bin/opsmop and (soon) push and pull mode variants.
-
-First install [OpsMop](https://github.com/opsmop/opsmop).
-
-Local Mode Usage
-================
-
-Check for errors and missing files:
-
-    opsmop validate content/hello.py
-
-Dry-run mode:
-
-    opsmop check content/hello.py
-
-Apply configuration:
-
-    opsmop apply content/hello.py
+WARNING: the opsmop language is now in flux prior to a 1.0 hardening of the language spec. This should be rresolved in a few weeks.  This note is as of January 15, 2019.
 
 License
 =======

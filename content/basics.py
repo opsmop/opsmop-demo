@@ -9,32 +9,28 @@ class WebServers(Role):
     def set_variables(self):
         return dict(what='bar', code=1234)
 
-    def set_resources(self):
+    def main(self):
 
         # this is not a real example and is just a bunch of resources thrown together
-        # a more complete example installing a popular-application  may be added later.
+        # illustrating syntax, basic variables, and change detection.
+        # a more complete example installing a popular-application may be added later.
 
-        return Resources(
+        p1 = File(name="/tmp/opsmop-foo.txt", from_content="Hello World!")
 
-            File(name="/tmp/opsmop-foo.txt", from_content="Hello World!", signals="restart_foo"),
+        File(name=T("/tmp/opsmop-{{ what }}.txt"), from_content="Hello World 2!") # a dynamic path
 
-            File(name=T("/tmp/opsmop-{{ what }}.txt"), from_content="Hello World 2!"), # a dynamic path
+        bar_contents = Shell("cat /tmp/opsmop-bar.txt")
 
-            Shell("cat /tmp/opsmop-bar.txt", register="bar_contents"),
+        Echo("{{ bar_contents.data }}")
 
-            Echo("{{ bar_contents.data }}"),
+        p2 = Package(name="cowsay", method="brew")
 
-            Package(name="cowsay", method="brew", signals="restart_nginx"),
+        if p1.changed:
+            Service(name='foo', restarted=True)
 
-            Echo("resources complete!")
-
-        )
-
-    def set_handlers(self):
-        return Handlers(
-            restart_nginx = Service(name='nginx', restarted=True),
-            restart_foo   = Service(name='foo', restarted=True),
-        )
+        if p2.changed:
+            Service(name='nginx', restarted=True)
+        
 
 class Demo(Policy):
 
@@ -42,8 +38,9 @@ class Demo(Policy):
         return dict(asdf = 'jkl;')
 
     def set_roles(self):
-        roles = [ WebServers(name='webservers'), ]
-        return Roles(*roles)
+        return Roles(
+            WebServers(name='webservers')
+        )
    
 if __name__ == '__main__':
     Cli(Demo())
