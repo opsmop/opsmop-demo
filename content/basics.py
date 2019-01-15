@@ -16,18 +16,12 @@ class WebServers(Role):
         # a more complete example installing a popular-application may be added later.
 
         p1 = File(name="/tmp/opsmop-foo.txt", from_content="Hello World!")
-
         File(name=T("/tmp/opsmop-{{ what }}.txt"), from_content="Hello World 2!") # a dynamic path
-
         bar_contents = Shell("cat /tmp/opsmop-bar.txt")
-
         Echo("{{ bar_contents.data }}")
-
         p2 = Package(name="cowsay", method="brew")
-
         if p1.changed:
             Service(name='foo', restarted=True)
-
         if p2.changed:
             Service(name='nginx', restarted=True)
         
