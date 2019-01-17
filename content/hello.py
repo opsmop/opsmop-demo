@@ -14,18 +14,14 @@ class HelloRole(Role):
     def set_variables(self):
         return dict(program='OpsMop')
 
-    def set_resources(self):
+    def main(self):
 
         msg = T("Hello {{ program }} World! {{ say}}!")
 
-        return Resources(
-            File(name="/tmp/foo.txt", from_content=msg, signals="file_changed")
-        )
+        f1 = File(name="/tmp/foo.txt", from_content=msg)
 
-    def set_handlers(self):
-        return Handlers(
-            file_changed = Echo("file has changed")
-        )
+        if f1.changed:
+            Echo("file has changed")
 
 # -----------------
 
