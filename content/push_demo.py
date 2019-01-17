@@ -30,25 +30,17 @@ class WebServers(BaseRole):
     def set_variables(self):
         return dict(x=5, y=6, z=7)
 
-    def set_resources(self):
-        return Resources(
-            Debug(),
-			File("/tmp/foo3.txt", from_content="Hey!", signals='evt_01'),
-            File("/tmp/foo1.txt", from_template="templates/foo.j2", signals='evt_02'),
-            Shell("uname -a", changed_when=False),
-        )
+    def main(self):
+        Debug()
+        f1 = File("/tmp/foo3.txt", from_content="Hey!")
+        f2 = File("/tmp/foo1.txt", from_template="templates/foo.j2")
+        Shell("uname -a", changed_when=False)
 
-    def set_handlers(self):
-        return Handlers(
-            evt_01 = Resources(
-               Echo("one"),
-               Echo("two")
-            ),
-            evt_02 = Resources(
-               Echo("three")
-            )
-        )
-        return Handlers()
+        if f1.changed:
+            Echo("one")
+            Echo("two")
+        if f2.changed:
+            Echo("three")
 
     def allow_fileserving_paths(self):
         # this is optional, the default is just '.' which means where this file is
@@ -77,16 +69,13 @@ class AnotherRole(BaseRole):
         # number of hosts to process at once
         return 5
 
-
     def inventory(self):
         return inventory.filter(groups=['webservers*','dbservers*'])
 
-    def set_resources(self):
-        return Resources(
-             Echo("hi"),
-             File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770),
-             Echo("??")
-        )
+    def main(self):
+        Echo("hi")
+        File("/tmp/foo2.txt", from_file="files/foo2.txt", mode=0o770)
+        Echo("that was easy")
 
 class Demo(Policy):
 
@@ -98,7 +87,6 @@ class Demo(Policy):
             WebServers(name='webservers', tag='webservers'),
             AnotherRole(tag='another')
         )
-
 
     def allow_fileserving_patterns(self):
         # this is totally optional, the default is '*'
