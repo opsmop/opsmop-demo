@@ -10,59 +10,45 @@ class FeatureOne(Role):
     def should_process_when(self):
         return UserFacts.feature_flags.get('ff01', False)
 
-    def set_resources(self):
+    def main(self):
 
         command = T("Set warp speed to {{ UserFacts.warp_factor }}, Engage!")
-
-        return Resources(
-            DebugFacts(),
-            Echo("The security officer is {{ UserFacts.crew.officers.security }}"),
-            Set(command=command), # copy python var into scope
-            Echo("The singularity is becoming unstable. {{ command }}")
-        )
+        DebugFacts()
+        Echo("The security officer is {{ UserFacts.crew.officers.security }}")
+        Echo("The singularity is becoming unstable. {{ command }}")
 
 class FeatureTwo(Role):
 
-    def should_process_when(self):
-        return UserFacts.feature_flags.get('ff02', False)
+    def main(self):
 
-    def set_resources(self):
-        return Resources(
-            Echo("This won't actually run until you modify feature_flags.json to enable ff02"),
-            DebugFacts()
-        )
+        if not UserFacts.feature_flags.get('ff02', False):
+            return
+
+        Echo("This won't actually run until you modify feature_flags.json to enable ff02")
+        DebugFacts()
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        resources = Resources()
-        resources.add([
-            Directory("/etc/opsmop/facts.d", owner=USERNAME),
-            File("/etc/opsmop/facts.d/feature_flags.json", from_file="files/feature_flags.json", owner=USERNAME, mode=0o644, signals='yep'),
-            File("/etc/opsmop/facts.d/star_trek.yml", from_file="files/star_trek.yml", owner=USERNAME, mode=0o644, signals='yep'),
-            File("/etc/opsmop/facts.d/dynamic_facts.sh", from_file="files/dynamic_facts.sh", owner=USERNAME, mode=0o755, signals='yep')
-        ])
-        return resources
+    def main(self):
+        f1 = Directory("/etc/opsmop/facts.d", owner=USERNAME)
+        f2 = File("/etc/opsmop/facts.d/feature_flags.json", from_file="files/feature_flags.json", owner=USERNAME, mode=0o644),
+        f3 = File("/etc/opsmop/facts.d/star_trek.yml", from_file="files/star_trek.yml", owner=USERNAME, mode=0o644),
+        f4 = File("/etc/opsmop/facts.d/dynamic_facts.sh", from_file="files/dynamic_facts.sh", owner=USERNAME, mode=0o755)
 
-    def set_handlers(self):
-        return Handlers(
-            yep = Resources(
-                Echo("fyi, we just set up /etc/opsmop/facts.d for you"),
-                Echo("check out the file contents and edit them if you like")
-            )
-        )
+        if f1.changed or f2.changed or f3.changed or f4.changed:
+            Echo("fyi, we just set up /etc/opsmop/facts.d for you")
+            Echo("check out the file contents and edit them if you like")
 
-    def post(self):
         UserFacts.invalidate()
 
 class Demo(Policy):
 
     def set_roles(self):
-       return Roles(
-           CommonSetup(),
-           FeatureOne(),
-           FeatureTwo(),
-       )
+        return Roles(
+            CommonSetup(),
+            FeatureOne(),
+            FeatureTwo()
+        )
 
 if __name__ == '__main__':
     Cli(Demo())
