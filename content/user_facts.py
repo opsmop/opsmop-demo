@@ -31,8 +31,8 @@ class CommonSetup(Role):
 
     def main(self):
         f1 = Directory("/etc/opsmop/facts.d", owner=USERNAME)
-        f2 = File("/etc/opsmop/facts.d/feature_flags.json", from_file="files/feature_flags.json", owner=USERNAME, mode=0o644),
-        f3 = File("/etc/opsmop/facts.d/star_trek.yml", from_file="files/star_trek.yml", owner=USERNAME, mode=0o644),
+        f2 = File("/etc/opsmop/facts.d/feature_flags.json", from_file="files/feature_flags.json", owner=USERNAME, mode=0o644)
+        f3 = File("/etc/opsmop/facts.d/star_trek.yml", from_file="files/star_trek.yml", owner=USERNAME, mode=0o644)
         f4 = File("/etc/opsmop/facts.d/dynamic_facts.sh", from_file="files/dynamic_facts.sh", owner=USERNAME, mode=0o755)
 
         if f1.changed or f2.changed or f3.changed or f4.changed:
