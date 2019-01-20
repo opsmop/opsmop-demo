@@ -28,11 +28,9 @@ class BasicExample(Role):
     def set_variables(self):
         return dict(a=1, b=5150, c="badwolf")
 
-    def set_resources(self):
-        return Resources(
-            Debug(),
-            Echo("The value of a is {{ a }}")
-        )
+    def main(self):
+        b = 2
+        Echo("The value of a is {{ a }} and b = {{ b }}")
 
 
 # ---------------------------------------------------------------------------------------
@@ -41,9 +39,8 @@ class BasicExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-        )
+    def main(self):
+        pass
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles
