@@ -25,13 +25,11 @@ class BasicExample(Role):
     def set_variables(self):
        return dict(a=1, b=5150, c="badwolf")
 
-    def set_resources(self):
-        return Resources(
-            Group(name="opsmgrp1"),
-            Group(name="opsmgrp2", gid=8008),
-            Group(name="opsmgrp3", system=True),
-            Group(name="opsmgrp1", absent=True)
-        )
+    def main(self):
+        Group(name="opsmgrp1")
+        Group(name="opsmgrp2", gid=8008)
+        Group(name="opsmgrp3", system=True)
+        Group(name="opsmgrp1", absent=True)
 
 
 
@@ -41,9 +39,8 @@ class BasicExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-        )
+    def main(self):
+        pass
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles

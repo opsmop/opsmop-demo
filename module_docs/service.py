@@ -27,15 +27,11 @@ USERNAME = getpass.getuser()
 
 class BasicExample(Role):
 
-    def set_resources(self):
-        
-        service_name = 'postgres'
-
-        return Resources(
-            Service(name='postgres', started=True, enabled=True),
-            Service(name='postgres', started=False, enabled=False),
-            Service(name='postgres', started=True, enabled=True)
-        )
+    def main(self):
+                
+        Service(name='postgres', started=True, enabled=True)
+        Service(name='postgres', started=False, enabled=False)
+        Service(name='postgres', started=True, enabled=True)
 
 
 # ---------------------------------------------------------------------------------------
@@ -44,9 +40,8 @@ class BasicExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-        )
+    def main(self):
+        pass
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles

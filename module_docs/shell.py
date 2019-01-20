@@ -28,24 +28,20 @@ class BasicExample(Role):
     def set_variables(self):
         return dict(a=1, b=5150, c="badwolf")
 
-    def set_resources(self):
+    def main(self):
         
-        return Resources(
-            
-            # here is an example of running a command and saving the output and return code
-            Shell("date | cut -f1 -d ' '", register='date'),
-            Echo("today is {{ date.data }} and the return code was {{ date.rc }}"),
+        # here is an example of running a command and saving the output and return code
+        date = Shell("date | cut -f1 -d ' '")
+        Echo("today is {{ date.data }} and the return code was {{ date.rc }}")
 
-            # you can ignore return codes like this
-            Shell("/bin/false", ignore_errors=True),
+        # you can ignore return codes like this
+        Shell("/bin/false", ignore_errors=True),
 
-            # or like this - soon
-            # Shell("/bin/false", failed_when=Eval('a > b')),
+        # or like this - soon
+        Shell("/bin/false", failed_when=lambda x: x.rc != 42)
 
-            # you can use variables in shell commands like this:
-            Shell(T("echo {{ a }} {{ b }} {{ c }}")),
-
-        )
+        # you can use variables in shell commands like this:
+        Shell(T("echo {{ a }} {{ b }} {{ c }}"))
 
 # ---------------------------------------------------------------------------------------
 # SETUP: a helper role that sets up for this demo
@@ -53,9 +49,8 @@ class BasicExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-        )
+    def main(self):
+        pass
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles

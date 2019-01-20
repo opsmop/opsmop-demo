@@ -29,20 +29,17 @@ class BasicExample(Role):
     def set_variables(self):
         return dict(a=1, b=5150, c="badwolf")
 
-    def set_resources(self):
-        return Resources(
+    def main(self):
 
-            DebugFacts(),
+        # explicit package provider selection works like this
+        # Package(name='cowsay', method='yum')
 
-            # more provider types are coming soon.
-            # Package(name='pygments', method='pip'), 
+        # uninstall
+        Package(name='cowsay', absent=True)
 
-            # uninstall
-            Package(name='cowsay', absent=True),
+        # install
+        Package(name='cowsay')
 
-            # install
-            Package(name='cowsay')
-        )
 
 
 
@@ -52,9 +49,8 @@ class BasicExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-        )
+    def main(self):
+        pass
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles
