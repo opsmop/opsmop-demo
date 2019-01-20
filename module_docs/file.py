@@ -31,13 +31,11 @@ class Jinja2TemplateExample(Role):
     def set_variables(self):
         return dict(a=1, b=5150, c="badwolf")
 
-    def set_resources(self):
-        return Resources(
-            # for template language and variable scoping information, please consult the language docs
-            Debug(),
-            File(name="/tmp/opsmop-demo/foo1.txt", from_template="templates/foo.txt.j2"),
-            Shell("cat /tmp/opsmop-demo/foo1.txt")
-        )
+    def main(self):
+        # for template language and variable scoping information, please consult the language docs
+        File(name="/tmp/opsmop-demo/foo1.txt", from_template="templates/foo.txt.j2")
+        Shell("cat /tmp/opsmop-demo/foo1.txt")
+
 
 
 # --------------------------------------------------------------------------------------
@@ -50,12 +48,11 @@ class Jinja2TemplateExample(Role):
 
 class CopyExample(Role):
 
-    def set_resources(self):
-        return Resources(
-             # owner/group/mode can be used with any of these forms, just showing one example here
-             File(name="/tmp/opsmop-demo/foo2.txt", from_file="files/foo.txt", owner=USERNAME, mode=0x755),
-             Shell("cat /tmp/opsmop-demo/foo2.txt")
-        )    
+    def main(self):
+             
+        # owner/group/mode can be used with any of these forms, just showing one example here
+        File(name="/tmp/opsmop-demo/foo2.txt", from_file="files/foo.txt", owner=USERNAME, mode=0x755)
+        Shell("cat /tmp/opsmop-demo/foo2.txt") 
 
 # --------------------------------------------------------------------------------------
 # EXAMPLE: Copy From String
@@ -70,14 +67,12 @@ class ContentExample(Role):
     def set_variables(self):
         return dict(a=2, b=2112, c="darmok")
 
-    def set_resources(self):
-        return Resources(
-             Debug(),
-             File(name="/tmp/opsmop-demo/foo3.txt", from_content="Happy Birthday"),
-             Shell("cat /tmp/opsmop-demo/foo3.txt"),
-             File(name="/tmp/opsmop-demo/foo4.txt", from_content=T("Template test! a={{ a}}")),
-             Shell("cat /tmp/opsmop-demo/foo4.txt")
-        )
+    def main(self):
+
+        File(name="/tmp/opsmop-demo/foo3.txt", from_content="Happy Birthday")
+        Shell("cat /tmp/opsmop-demo/foo3.txt")
+        File(name="/tmp/opsmop-demo/foo4.txt", from_content=T("Template test! a={{ a}}"))
+        Shell("cat /tmp/opsmop-demo/foo4.txt")
 
 # ---------------------------------------------------------------------------------------
 # EXAMPLE: Downloading a File
@@ -90,14 +85,10 @@ class ContentExample(Role):
 class FromUrlExample(Role):
 
 
-    def set_resources(self):
+    def main(self):
         
         src = "https://raw.githubusercontent.com/opsmop/opsmop/master/README.md"
-        
-        return Resources(
-             File(name="/tmp/opsmop-demo/foo5.txt", from_url=src, overwrite=False)
-        )
-
+        File(name="/tmp/opsmop-demo/foo5.txt", from_url=src, overwrite=False)
 
 # ---------------------------------------------------------------------------------------
 # EXAMPLE: Deleting a File
@@ -109,14 +100,9 @@ class FromUrlExample(Role):
 
 class AbsentExample(Role):
 
-    def set_resources(self):
-        return Resources(
-             File(name="/tmp/opsmop-demo/foo4.txt", absent=True),
-             Shell("ls /tmp/opsmop-demo/foo4.txt", ignore_errors=True),
-             # the file is already deleted so this next step is a no-op
-             File(name="/tmp/opsmop-demo/foo4.txt", absent=True),
-        )
-
+    def main(self):
+        File(name="/tmp/opsmop-demo/foo4.txt", absent=True)
+        Shell("ls /tmp/opsmop-demo/foo4.txt", ignore_errors=True)
 
 # ---------------------------------------------------------------------------------------
 # SETUP: a helper role that sets up for this demo
@@ -124,10 +110,8 @@ class AbsentExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-              Directory(name="/tmp/opsmop-demo/")
-        )
+    def main(self):
+        Directory(name="/tmp/opsmop-demo/")
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles
