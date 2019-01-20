@@ -32,11 +32,9 @@ class BasicExample(Role):
     def set_variables(self):
         return dict(a=1, b=5150, c="badwolf")
 
-    def set_resources(self):
-        return Resources(
-            Echo("I am a {{ Platform.system() }} system"),
-            DebugFacts(),
-        )
+    def main(self):
+        Echo("I am a {{ Platform.system() }} system")
+        DebugFacts()
 
 # ---------------------------------------------------------------------------------------
 # SETUP: a helper role that sets up for this demo
@@ -44,9 +42,8 @@ class BasicExample(Role):
 
 class CommonSetup(Role):
 
-    def set_resources(self):
-        return Roles(
-        )
+    def main(self):
+        pass
 
 # ---------------------------------------------------------------------------------------
 # POLICY: loads all of the above roles
