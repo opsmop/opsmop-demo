@@ -15,16 +15,27 @@ class Main(Role):
         # explicitly ignoring errors
         x = Shell("/usr/bin/false", ignore_errors=True)
         Echo("the result was {{ x }} - {{ x.rc }} - {{ x.data }}")
+        if x.rc == 42:
+            # this won't happen, but you can raise arbitrary exceptions
+            raise Exception("failed")
         
         # conditionally ignoring errors, in a trivial way
         Shell("/usr/bin/false", failed_when=False)
 
         # conditionally deciding when to ignore errors
-        Shell("/usr/bin/false", failed_when=lambda o: o.rc != 0)
+        Shell("/usr/bin/false", failed_when=lambda o: o.rc == 0)
 
         # considering the output to decide when to fail, also showing the condition assigned to a variable
-        Shell("echo hi", failed_when=lambda o: 'hi' in o.data)
+        Shell("echo hi", failed_when=lambda o: 'hi' not in o.data)
 
+        # exception handling
+        try:
+            Shell("/usr/bin/false")
+        except:
+            Echo("exception recovered")
+
+        Echo("this next step will fail")
+        Shell("/usr/bin/false")
 
 class Demo(Policy):
 
