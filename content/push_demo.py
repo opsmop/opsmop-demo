@@ -31,7 +31,7 @@ class WebServers(BaseRole):
         return dict(x=5, y=6, z=7)
 
     def main(self):
-        Debug()
+
         f1 = File("/tmp/foo3.txt", from_content="Hey!")
         f2 = File("/tmp/foo1.txt", from_template="templates/foo.j2")
         Shell("uname -a", changed_when=False)

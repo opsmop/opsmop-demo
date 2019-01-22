@@ -35,6 +35,7 @@ class Main(Role):
             Echo("exception recovered")
 
         Echo("this next step will fail")
+
         Shell("/usr/bin/false")
 
 class Demo(Policy):
