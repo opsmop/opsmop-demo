@@ -14,62 +14,44 @@ from opsmop.core.easy import *
 class One(Role):
 
     def set_variables(self):
-        return dict(glorp='fizz', level='one')
+        # here these are hard coded but they could also come from a database lookup
+        # or from a config file
+        return dict(some_unused_variable='...', level=1, foo=dict(x=1, y=2))
 
-    def set_resources(self):
+    def main(self):
+        car = "DeLorean"
 
-        return Resources(
-            Debug(),
-            Asserts(foosball=1, glorp='fizz', blarg=5150, other=True, level='one'),
-            Set(level='runtime'),
-            # SetGlobal(blippy='foo'),
-            Resources(
-                Set(level='nested'),
-                # Asserts(level='nested'),
-            ),
-            Asserts(level='runtime'),
-        )
+        Echo("level={{ level }}, color={{ color }}, car={{ car }}, code={{ code }}, y={{ foo.y }} ") 
+        # direct variable access from Python works like this:
+        # Echo("level = %s" % self.vars.level)
+        # Echo("color = %s" % self.vars.color)
 
 # ==============================================================================
 
 class Two(Role):
 
     def set_variables(self):
-        return dict(level='two')
+        return dict(level='two', foo=dict(x=3,y=4))
 
-    def set_resources(self):
-
-        res = Resources()
-
-        res.add([
-            Debug(),
-            Echo("foosball={{ foosball }}")
-        ])
-
-        res.add([
-            # Asserts(blippy='foo'),   
-            Asserts(blarg=5150, level='two'),
-            # some alternate ways to do things, more as a proof of internals
-            Asserts('blarg > 3000'),
-            Debug('blarg', 'foosball', random=Eval('2 * blarg + 1000'))
-        ])
-
-        return res
+    def main(self):
+        car = "NSX"
+        code = 8675309
+        Echo("level={{ level }}, color={{ color }}, car={{ car }}, code={{ code }}, y={{ foo.y }}")
 
 # ==============================================================================
 
 class ScopeTest(Policy):
 
     def set_variables(self):
-        return dict(level='Scope', other=True)
+        return dict(level=0, other=True)
 
     def set_roles(self):
         return Roles(
-            One(foosball=1),
-            Two(foosball=2),
-            Two(foosball=3)
+            One(color='red'),
+            Two(color='green'),
+            Two(color='blue')
         )
 
 if __name__ == '__main__':
-    Cli(ScopeTest(blarg=5150))
+    Cli(ScopeTest(code=5150))
 
